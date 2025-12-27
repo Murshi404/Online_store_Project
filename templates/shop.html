@@ -1,0 +1,46 @@
+{% extends 'home.html' %}
+{% load static %}
+
+{% block title %}Shop{% endblock %}
+
+{% block content %}
+
+<div class="header-container">
+    <h2><strong>Shop now!</strong> Get a stunning, luxury bouquet while stocks last.</h2>
+    <h2>Flowers to commemorate any occasion...</h2>
+</div>
+
+<div class="product-grid container">
+    {% for product in products %}
+
+    <div class="product-item">
+
+        <div class="image-card">
+            <a href="{% url 'product_detail' pk=product.id %}">
+                {% if product.image %}
+                <img src="{{ product.image.url }}" alt="{{ product.name }}" />
+                {% else %}
+                <img src="{% static 'images/placeholder.jpg' %}" alt="No image available" />
+                {% endif %}
+            </a>
+        </div>
+
+        <div class="product-info">
+            <div class="name-price-group">
+                <h3 class="product-name-small">{{ product.name }}</h3>
+                <p class="product-price">Price: ${{ product.price }}</p>
+            </div>
+
+            {% if not product.is_available %}
+            <p class="product-status sold-out">Sold out</p>
+            {% endif %}
+        </div>
+
+    </div>
+    {% empty %}
+    <p>No products are currently available.</p>
+
+    {% endfor %}
+</div>
+
+{% endblock content %}

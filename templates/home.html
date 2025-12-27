@@ -1,0 +1,174 @@
+{% load static %}
+
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{% block title %}Blossom Store{% endblock title %}</title>
+
+    <!-- Google Font Link -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Roboto+Slab:wght@100..900&family=Tagesschrift&display=swap"
+        rel="stylesheet">
+
+    <!-- Bootstrap CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+
+    <!-- Custom CSS -->
+    <link rel="stylesheet" href="{% static 'css/style.css' %}?v=2">
+</head>
+
+<body>
+    <!-- Navigation Bar -->
+    <header class="navbar">
+        <div class="logo">🌸 Blossom</div>
+        <nav>
+            <ul>
+                <li><a href="{% url 'home' %}">Home</a></li>
+                <li><a href="{% url 'blogs' %}">Blogs</a></li>
+                <li><a href="{% url 'gallery' %}">Gallery</a></li>
+                <li><a href="{% url 'shop' %}">Shop</a></li>
+                <li><a href="{% url 'contact' %}">Contact Us</a></li>
+            </ul>
+        </nav>
+        <div class="cart">
+            <a href="{% url 'cart_detail' %}"><i class="fa-solid fa-cart-shopping"></i></a>
+
+            {% if user.is_authenticated %}
+            <form method="post" action="{% url 'logout' %}" style="display:inline; margin-left: 20px;">
+                {% csrf_token %}
+                <button type="submit" class="auth-button">
+                    Logout
+                </button>
+            </form>
+            {% else %}
+            <a class="auth-button" href="{% url 'login' %}">
+                Login
+            </a>
+            {% endif %}
+
+        </div>
+    </header>
+
+    <!-- Hero Section -->
+    {% if request.path == '/' or request.path == '' %}
+    <section class="hero">
+        <div class="hero-content">
+            <h1>Welcome To The World Of Freshly Blooming Flowers</h1>
+            <p>Fresh Flowers Delivered Everyday Only In Blossom.....</p>
+            <a href="{% url 'shop' %}" class="btn">Shop Now</a>
+        </div>
+    </section>
+    {% endif %}
+
+    <main>
+        {% block content %}
+
+        <!-- Best Sellers -->
+        <section class="best-sellers-section">
+            <div class="best-sellers-content">
+                <h2 class="section-title">Best Sellers</h2>
+                <p class="section-description">
+                    Transform your home or office with our gorgeous best selling seasonal arrangements.
+                </p>
+                <a href="{% url 'shop' %}" class="btn shop-now-btn">Shop Best Sellers</a>
+            </div>
+
+            <div class="best-sellers-card-container">
+
+                <div class="best-seller-card">
+                    <img src="{% static 'images/best_sellers1.jpg' %}" alt="Orchid Bouquet" class="product-image">
+                    <h3 class="product-name">Luxury Orchid</h3>
+                    <p class="product-price">$250.00</p>
+                </div>
+
+                <div class="best-seller-card">
+                    <img src="{% static 'images/best_sellers2.jpg' %}" alt="Red Tulip Bouquet" class="product-image">
+                    <h3 class="product-name">Vibrant Tulips</h3>
+                    <p class="product-price">$155.00</p>
+                </div>
+
+                <div class="best-seller-card">
+                    <img src="{% static 'images/best_sellers3.jpg' %}" alt="Sunflower Bouquet" class="product-image">
+                    <h3 class="product-name">Seasonal Mix</h3>
+                    <p class="product-price">$300.00</p>
+                </div>
+
+            </div>
+        </section>
+
+        <!-- Holiday Section -->
+        <section class="holidays-section">
+            <div class="holidays-image-container">
+                <img src="{% static 'images/holiday_img.jpg' %}" alt="Seasonal Flowers" class="holidays-image">
+            </div>
+            <div class="holidays-content">
+                <h2 class="section-title">Shop Holidays & Occasions</h2>
+                <p class="section-description">
+                    <a href="{% url 'shop' %}" class="send-link">Send flowers today... </a>
+                </p>
+            </div>
+        </section>
+
+        {% endblock content %}
+    </main>
+
+    <!-- Footer -->
+    <footer class="main-footer">
+        <div class="footer-content">
+
+            <div class="footer-col-left">
+                <span class="footer-logo">Blossom</span>
+                <div class="social-icons">
+                    <a href="#"><i class="fa-brands fa-instagram"></i></a>
+                    <a href="#"><i class="fa-brands fa-facebook-f"></i></a>
+                    <a href="#"><i class="fa-brands fa-twitter"></i></a>
+                </div>
+            </div>
+
+            <div class="footer-col-right">
+                <div class="link-group">
+                    <a href="{% url 'home' %}">Home</a>
+                    <a href="{% url 'shop' %}">Shop</a>
+                    <a href="{% url 'contact' %}">Contact Us</a>
+                </div>
+
+                <div class="link-group">
+                    <a href="{% url 'blogs' %}">Blog</a>
+                    <a href="{% url 'gallery' %}">Gallery</a>
+                </div>
+            </div>
+        </div>
+
+        <div class="footer-bottom">
+            &copy; <span id="current-year"></span> Blossom Store. All Rights Reserved.
+        </div>
+    </footer>
+
+    <!-- Script to automatically update the copyright year -->
+    <script>
+        document.getElementById('current-year').textContent = new Date().getFullYear();
+    </script>
+
+    <!-- Bootstrap CDN Link -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+
+    <script>
+        // Got the carousel element by its ID
+        var galleryCarousel = document.getElementById('carouselExampleAutoplaying');
+
+        //Bootstrap Carousel instance
+        var carousel = new bootstrap.Carousel(galleryCarousel, {
+            interval: 3000, // Time in milliseconds between slides (3 seconds)
+            pause: 'hover'  // Pauses the cycling when the mouse enters the carousel
+        });
+
+    </script>
+
+</body>
+
+</html>

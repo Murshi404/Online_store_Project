@@ -1,0 +1,81 @@
+{% extends 'home.html' %}
+{% load static %}
+
+{% block title %}Checkout{% endblock %}
+
+{% block content %}
+<script src="https://checkout.razorpay.com/v1/checkout.js"></script>
+
+<div class="main-content-padding">
+
+<div class="checkout-wrapper container mt-4">
+    <form method="POST">
+        <h2 class="mb-3">Checkout 🛒</h2>
+        {% csrf_token %}
+
+        <div class="mb-3">
+            <label class="form-label required-label">Name (required)</label>
+            <div class="row gx-2">
+                <div class="col-md-6">
+                    <input type="text" name="firstName" class="form-control" id="firstName" placeholder="First Name" required>
+                </div>
+                <div class="col-md-6">
+                    <input type="text" name="lastName" class="form-control" id="lastName" placeholder="Last Name" required>
+                </div>
+            </div>
+        </div>
+
+        <div class="mb-3">
+            <label class="form-label required-label">Email (required)</label>
+            <input type="email" name="email" class="form-control" id="email" placeholder="email@example.com" required>
+        </div>
+
+        <div class="mb-3">
+            <label class="form-label required-label">Phone Number</label>
+            <input type="text" name="phone" class="form-control" placeholder="Enter your phone number" required>
+        </div>
+
+        <div class="mb-3">
+            <label class="form-label required-label">Full Address</label>
+            <textarea name="address" class="form-control" rows="2" placeholder="Enter your delivery address" required></textarea>
+        </div>
+
+        <p><strong>Total Amount:</strong> ₹{{ total }}</p>
+
+        <button type="submit" id="rzp-button" class="btn btn-success">Proceed to Payment 💳</button>
+
+        <p class="mt-2 text-muted">
+            🔐 Please ensure your details are correct before proceeding.<br>
+            You’ll be redirected securely to the payment gateway.
+        </p>
+    </form>
+</div>
+
+{% if trigger_payment %}
+<script>
+    const options = {
+        key: "{{ razorpay_key_id }}",
+        amount: "{{ amount_paise }}",
+        currency: "INR",
+        name: "My Shop",
+        description: "Order Payment",
+        order_id: "{{ razorpay_order_id }}",
+        handler: function (response) {
+            window.location.href = "/payment/success/?payment_id=" + response.razorpay_payment_id;
+        },
+        prefill: {
+            name: "{{ user_name|default:'' }}",
+            email: "{{ user_email|default:'' }}",
+            contact: "{{ user_phone|default:'' }}"
+        },
+        theme: {
+            color: "#28a745"
+        }
+    };
+
+    const rzp = new Razorpay(options);
+    rzp.open();
+</script>
+{% endif %}
+</div>
+{% endblock content %}

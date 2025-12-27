@@ -1,0 +1,41 @@
+{% extends 'home.html' %}
+{% load static %}
+
+{% block title %}Shop by Category{% endblock %}
+
+{% block content %}
+<section class="shop-header">
+    <div class="container">
+        <h1>Shop by Category</h1>
+        <p>Explore our beautiful collections for any occasion.....</p>
+    </div>
+</section>
+
+<section class="category-grid-wrapper">
+    <div class="category-grid container">
+
+        {% for category in categories %}
+        <div class="category-card">
+            <a href="{% url 'product_by_category' category_slug=category.slug %}">
+
+                {% if category.image_url %}
+                    {% if category.image_url|slice:":6" == 'static' %}
+                        <img src="{% static category.image_url|slice:" 7:" %}" alt="{{ category.name }}" />
+                    {% else %}
+                        <img src="{{ category.image_url }}" alt="{{ category.name }}" />
+                    {% endif %}
+                {% else %}
+                <img src="{% static 'images/placeholder.jpg' %}" alt="{{ category.name }}" />
+                {% endif %}
+            </a>
+            <div class="category-info">
+                <h2>{{ category.name }}</h2>
+                <a href="{% url 'product_by_category' category_slug=category.slug %}" class="btn category-btn">View
+                    Collection</a>
+            </div>
+        </div>
+        {% empty %}
+        {% endfor %}
+    </div>
+</section>
+{% endblock content %}

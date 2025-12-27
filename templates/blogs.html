@@ -1,0 +1,138 @@
+{% extends 'home.html' %}
+{% load static %}
+
+{% block title %}Blogs{% endblock %}
+
+{% block content %}
+
+<!-- Our Blog Section -->
+<div class="blog-section">
+    <div class="blog-content">
+        <h1>Our Blog</h1>
+        <p>Welcome to our blog, where we share insights, stories, and updates. We believe in providing valuable content
+            to inspire and inform our readers.</p>
+        <p>Here you'll find a collection of articles ranging from detailed guides to personal reflections, all crafted
+            to enhance your experience and knowledge.</p>
+    </div>
+    <div class="blog-image-container">
+        <img src="{% static 'images/blogs_hero.jpg' %}" alt="Placeholder Image">
+    </div>
+</div>
+
+<!-- Latest Post Section -->
+<section class="blog-latest-posts">
+    <h2>Latest Posts</h2>
+    <p>Stay tuned for our newest articles!.......</p>
+
+    <div class="blog-card-container">
+
+        <div class="blog-card">
+            <img src="{% static 'images/card_img1.jpg' %}" alt="Blog Image 1" class="card-image">
+            <h3 class="card-title">Top 8 Flowers for Wedding</h3>
+            <p class="card-description">Blossom has fresh and beautiful flowers for a important and beautiful occssion
+                like wed...</p>
+            <a href="#" class="read-more">Read More</a>
+        </div>
+
+        <div class="blog-card">
+            <img src="{% static 'images/card_img2.jpg' %}" alt="Blog Image 2" class="card-image">
+            <h3 class="card-title">Birth Month Flowers and Their Meanings</h3>
+            <p class="card-description">Birthday Special Offer Shop Birthday Flowers & get 15% off by using the discount
+                co...</p>
+            <a href="#" class="read-more">Read More</a>
+        </div>
+
+        <div class="blog-card">
+            <img src="{% static 'images/card_img3.jpg' %}" alt="Blog Image 3" class="card-image">
+            <h3 class="card-title">What Flower Matches Your Personality?</h3>
+            <p class="card-description">Everyone has a flower that matches their personality. Like humans, every
+                flower...</p>
+            <a href="#" class="read-more">Read More</a>
+        </div>
+
+    </div>
+</section>
+
+<!-- Customer Feedback Section -->
+<section class="testimonial-section">
+    <h2 class="section-title">What Our Customers Say!!!!!</h2>
+
+   <div id="testimonialCarousel" class="carousel slide" data-bs-ride="carousel" data-bs-interval="5000">
+        
+        <div class="carousel-indicators">
+            <button type="button" data-bs-target="#testimonialCarousel" data-bs-slide-to="0" class="active" aria-current="true" aria-label="Slide 1"></button>
+            <button type="button" data-bs-target="#testimonialCarousel" data-bs-slide-to="1" aria-label="Slide 2"></button>
+            </div>
+
+        <div class="carousel-inner">
+            
+            <div class="carousel-item active">
+                <div class="d-flex justify-content-center gap-30"> 
+                    
+                    <div class="testimonial-card">
+                        <p class="quote">"Blossom delivered the most beautiful arrangement exactly on time! The flowers were so fresh, and the service was excellent. Highly recommend!"</p>
+                        <div class="rating">⭐⭐⭐⭐⭐</div>
+                        <p class="customer-name">— Sarah M.</p>
+                        <p class="purchase-date">Ordered: Anniversary Bouquet</p>
+                    </div>
+
+                    <div class="testimonial-card">
+                        <p class="quote">"The site was easy to use, and the arrangement looked even better in person. A perfect gift that really brightened their day."</p>
+                        <div class="rating">⭐⭐⭐⭐⭐</div>
+                        <p class="customer-name">— David L.</p>
+                        <p class="purchase-date">Ordered: Sympathy Arrangement</p>
+                    </div>
+
+                    <div class="testimonial-card">
+                        <p class="quote">"Exceptional quality and fast delivery. This is my new go-to place for all flower needs!"</p>
+                        <div class="rating">⭐⭐⭐⭐⭐</div>
+                        <p class="customer-name">— Emily C.</p>
+                        <p class="purchase-date">Ordered: Birthday Roses</p>
+                    </div>
+
+                </div>
+            </div>
+
+            <div class="carousel-item">
+                <div class="d-flex justify-content-center gap-30">
+
+                    <div class="testimonial-card">
+                        <p class="quote">"Amazing service! My custom order was handled perfectly, and the recipient was thrilled with the vibrant colors and quality."</p>
+                        <div class="rating">⭐⭐⭐⭐⭐</div>
+                        <p class="customer-name">— Jessica B.</p>
+                        <p class="purchase-date">Ordered: Custom Mix</p>
+                    </div>
+
+                    <div class="testimonial-card">
+                        <p class="quote">"I appreciate the attention to detail. Every leaf and petal was perfect. Truly the best florists in town!"</p>
+                        <div class="rating">⭐⭐⭐⭐⭐</div>
+                        <p class="customer-name">— Robert T.</p>
+                        <p class="purchase-date">Ordered: Corporate Gifts</p>
+                    </div>
+                    
+                    <div class="testimonial-card">
+                        <p class="quote">"Absolutely stunning flowers! Delivered promptly and exceeded all expectations. A fantastic experience from start to finish."</p>
+                        <div class="rating">⭐⭐⭐⭐⭐</div>
+                        <p class="customer-name">— Hannah K.</p>
+                        <p class="purchase-date">Ordered: Mother's Day</p>
+                    </div>
+                    
+                </div>
+            </div>
+            
+        </div>
+        
+        <button class="carousel-control-prev" type="button" data-bs-target="#testimonialCarousel" data-bs-slide="prev">
+            <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+            <span class="visually-hidden">Previous</span>
+        </button>
+        <button class="carousel-control-next" type="button" data-bs-target="#testimonialCarousel" data-bs-slide="next">
+            <span class="carousel-control-next-icon" aria-hidden="true"></span>
+            <span class="visually-hidden">Next</span>
+        </button>
+        
+    </div>
+
+</section>
+
+{% endblock content %}

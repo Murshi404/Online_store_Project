@@ -1,0 +1,70 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Login</title>
+
+    <!-- Google Font Link -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Roboto+Slab:wght@100..900&family=Tagesschrift&display=swap"
+        rel="stylesheet">
+
+    <!-- CSS Link -->
+    <link rel="stylesheet" href="{% static 'css/login_style.css' %}">
+</head>
+
+<body>
+    <div class="page-wrapper">
+
+        <div class="banner">
+            <h1>Welcome to Blossom Store</h1>
+            <p>Fresh Flowers Delivered Everyday Only In Blossom Store.....</p>
+        </div>
+
+        <div class="login-container">
+            <h2>Welcome</h2>
+
+            {% if messages %}
+            <div class="alert alert-danger" role="alert">
+                {% for message in messages %}
+                {{ message }}
+                {% endfor %}
+            </div>
+            {% endif %}
+
+            <form action="{% url 'login' %}" method="POST">
+                {% csrf_token %}
+
+                {% if request.GET.next %}
+                <input type="hidden" name="next" value="{{ request.GET.next }}">
+                {% endif %}
+
+                <div class="form-field">
+                    <label for="username" class="form-label">Username</label>
+                    <input type="text" class="form-control" id="username" name="username"
+                        placeholder="Enter your username" required>
+                </div>
+
+                <div class="form-field">
+                    <label for="password" class="form-label">Password</label>
+                    <input type="password" class="form-control" id="password" name="password"
+                        placeholder="Enter your password" required>
+                </div>
+
+                <button type="submit" class="btn btn-primary">Login</button>
+            </form>
+
+            <div class="signup-link">
+                Don't have an account? <a href="{% url 'signup' %}">Sign up</a>
+            </div>
+        </div>
+    </div>
+
+</body>
+
+</html>

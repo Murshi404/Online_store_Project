@@ -1,0 +1,13 @@
+{% extends 'home.html' %}
+{% load static %}
+
+{% block title %}Payment_success{% endblock %}
+
+{% block content %}
+<div class="success-page-content">
+    <h2>Payment Successful!</h2>
+    <p>Thank you for your purchase. Please visit our Blossom Store again.</p>
+
+    <a href="{% url 'home' %}" class="btn-back-home">Back to Home</a>
+</div>
+{% endblock content %}

@@ -1,0 +1,72 @@
+{% extends 'home.html' %}
+{% load static %}
+
+{% block content %}
+
+<!-- Hero Section -->
+<section class="contact-hero-section">
+    <div class="container">
+        <h1 class="display-3">Contact Us</h1>
+
+        <p class="lead" style="max-width: 600px; margin: 20px auto;">
+            Every bloom tells a story, and we're ready to hear yours! Contact us for bespoke
+            arrangements, delivery inquiries, or personalized floral advice. We love connecting
+            with our customers.
+        </p>
+
+        <button type="button" class="btn btn-light btn-lg mt-4" data-bs-toggle="modal"
+            data-bs-target="#contactFormModal">
+            Get In Touch
+        </button>
+    </div>
+</section>
+
+<!-- Form Box -->
+<div class="modal fade" id="contactFormModal" tabindex="-1" aria-labelledby="contactFormModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered">
+        <div class="modal-content" class="modal-content custom-modal-content">
+
+            <div class="modal-header border-0 pb-0">
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+
+            <div class="modal-body pt-0">
+                <h2 id="contactFormModalLabel" class="mb-4">Contact Us</h2>
+
+                <form method="POST" action="">
+                    {% csrf_token %}
+
+                    <div class="mb-3">
+                        <label for="name" class="form-label required-label">Name (required)</label>
+                        <div class="row gx-2">
+                            <div class="col-md-6">
+                                <input type="text" class="form-control" id="firstName" placeholder="First Name"
+                                    required>
+                            </div>
+                            <div class="col-md-6">
+                                <input type="text" class="form-control" id="lastName" placeholder="Last Name" required>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="mb-3">
+                        <label for="email" class="form-label required-label">Email (required)</label>
+                        <input type="email" class="form-control" id="email" placeholder="email@.com" required>
+                    </div>
+
+                    <div class="mb-4">
+                        <label for="message" class="form-label required-label">Message (required)</label>
+                        <textarea class="form-control" id="message" rows="4" placeholder="Type your message here..."
+                            required></textarea>
+                    </div>
+
+                    <div class="d-flex justify-content-center">
+                        <button type="submit" class="btn btn-dark custom-send-btn">Send</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+
+{% endblock content %}
